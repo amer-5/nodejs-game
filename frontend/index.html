@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+  </head>
+  <body>
+    <div class="flex flex-col justify-between h-screen w-screen">
+      <h1 class="text-3xl text-black text-center mt-12 mb-8">
+        Guess the Word!
+      </h1>
+      <div class="flex flex-col items-center gap-3">
+        <p id="word-display" class="text-2xl">_ _ _ _ _</p>
+        <button id="guess-button" class="border-2 border-black p-2 rounded-[10px]">
+          Guess Letter
+        </button>
+        <button id="new-game" class="border-2 border-green-600 p-2 rounded-[10px]">New Game</button>
+        <p>Attempts Left: <span id="attempts">6</span></p>
+        <p id="message"></p>
+      </div>
+      <div class="keyboard mb-36">
+        <div class="grid gap-2">
+          <div class="flex justify-center space-x-2">
+            <div
+              id="key-Q"
+              class="w-10 h-10 bg-white border border-gray-300 rounded flex items-center justify-center text-lg shadow-sm cursor-pointer active:bg-gray-300"
+              onclick="sendLetter('Q')"
+            >
+              Q
+            </div>
+            <div
+              id="key-W"
+              class="w-10 h-10 bg-white border border-gray-300 rounded flex items-center justify-center text-lg shadow-sm cursor-pointer active:bg-gray-300"
+              onclick="sendLetter('W')"
+            >
+              W
+            </div>
+            <div
+              id="key-E"
+              class="w-10 h-10 bg-white border border-gray-300 rounded flex items-center justify-center text-lg shadow-sm cursor-pointer active:bg-gray-300"
+              onclick="sendLetter('E')"
+            >
+              E
+            </div>
+            <div
+              id="key-R"
+              class="w-10 h-10 bg-white border border-gray-300 rounded flex items-center justify-center text-lg shadow-sm cursor-pointer active:bg-gray-300"
+              onclick="sendLetter('R')"
+            >
+              R
+            </div>
+            <div
+              id="key-T"
+              class="w-10 h-10 bg-white border border-gray-300 rounded flex items-center justify-center text-lg shadow-sm cursor-pointer active:bg-gray-300"
+              onclick="sendLetter('T')"
+            >
+              T
+            </div>
+            <div
+              id="key-Y"
+              class="w-10 h-10 bg-white border border-gray-300 rounded flex items-center justify-center text-lg shadow-sm cursor-pointer active:bg-gray-300"
+              onclick="sendLetter('Y')"
+            >
+              Y
+            </div>
+            <div
+              id="key-U"
+              class="w-10 h-10 bg-white border border-gray-300 rounded flex items-center justify-center text-lg shadow-sm cursor-pointer active:bg-gray-300"
+              onclick="sendLetter('U')"
+            >
+              U
+            </div>
+            <div
+              id="key-I"
+              class="w-10 h-10 bg-white border border-gray-300 rounded flex items-center justify-center text-lg shadow-sm cursor-pointer active:bg-gray-300"
+              onclick="sendLetter('I')"
+            >
+              I
+            </div>
+            <div
+              id="key-O"
+              class="w-10 h-10 bg-white border border-gray-300 rounded flex items-center justify-center text-lg shadow-sm cursor-pointer active:bg-gray-300"
+              onclick="sendLetter('O')"
+            >
+              O
+            </div>
+            <div
+              id="key-P"
+              class="w-10 h-10 bg-white border border-gray-300 rounded flex items-center justify-center text-lg shadow-sm cursor-pointer active:bg-gray-300"
+              onclick="sendLetter('P')"
+            >
+              P
+            </div>
+          </div>
+          <div class="flex justify-center space-x-2">
+            <div
+              id="key-A"
+              class="w-10 h-10 bg-white border border-gray-300 rounded flex items-center justify-center text-lg shadow-sm cursor-pointer active:bg-gray-300"
+              onclick="sendLetter('A')"
+            >
+              A
+            </div>
+            <div
+              id="key-S"
+              class="w-10 h-10 bg-white border border-gray-300 rounded flex items-center justify-center text-lg shadow-sm cursor-pointer active:bg-gray-300"
+              onclick="sendLetter('S')"
+            >
+              S
+            </div>
+            <div
+              id="key-D"
+              class="w-10 h-10 bg-white border border-gray-300 rounded flex items-center justify-center text-lg shadow-sm cursor-pointer active:bg-gray-300"
+              onclick="sendLetter('D')"
+            >
+              D
+            </div>
+            <div
+              id="key-F"
+              class="w-10 h-10 bg-white border border-gray-300 rounded flex items-center justify-center text-lg shadow-sm cursor-pointer active:bg-gray-300"
+              onclick="sendLetter('F')"
+            >
+              F
+            </div>
+            <div
+              id="key-G"
+              class="w-10 h-10 bg-white border border-gray-300 rounded flex items-center justify-center text-lg shadow-sm cursor-pointer active:bg-gray-300"
+              onclick="sendLetter('G')"
+            >
+              G
+            </div>
+            <div
+              id="key-H"
+              class="w-10 h-10 bg-white border border-gray-300 rounded flex items-center justify-center text-lg shadow-sm cursor-pointer active:bg-gray-300"
+              onclick="sendLetter('H')"
+            >
+              H
+            </div>
+            <div
+              id="key-J"
+              class="w-10 h-10 bg-white border border-gray-300 rounded flex items-center justify-center text-lg shadow-sm cursor-pointer active:bg-gray-300"
+              onclick="sendLetter('J')"
+            >
+              J
+            </div>
+            <div
+              id="key-K"
+              class="w-10 h-10 bg-white border border-gray-300 rounded flex items-center justify-center text-lg shadow-sm cursor-pointer active:bg-gray-300"
+              onclick="sendLetter('K')"
+            >
+              K
+            </div>
+            <div
+              id="key-L"
+              class="w-10 h-10 bg-white border border-gray-300 rounded flex items-center justify-center text-lg shadow-sm cursor-pointer active:bg-gray-300"
+              onclick="sendLetter('L')"
+            >
+              L
+            </div>
+          </div>
+          <div class="flex justify-center space-x-2">
+            <div
+              id="key-Z"
+              class="w-10 h-10 bg-white border border-gray-300 rounded flex items-center justify-center text-lg shadow-sm cursor-pointer active:bg-gray-300"
+              onclick="sendLetter('Z')"
+            >
+              Z
+            </div>
+            <div
+              id="key-X"
+              class="w-10 h-10 bg-white border border-gray-300 rounded flex items-center justify-center text-lg shadow-sm cursor-pointer active:bg-gray-300"
+              onclick="sendLetter('X')"
+            >
+              X
+            </div>
+            <div
+              id="key-C"
+              class="w-10 h-10 bg-white border border-gray-300 rounded flex items-center justify-center text-lg shadow-sm cursor-pointer active:bg-gray-300"
+              onclick="sendLetter('C')"
+            >
+              C
+            </div>
+            <div
+              id="key-V"
+              class="w-10 h-10 bg-white border border-gray-300 rounded flex items-center justify-center text-lg shadow-sm cursor-pointer active:bg-gray-300"
+              onclick="sendLetter('V')"
+            >
+              V
+            </div>
+            <div
+              id="key-B"
+              class="w-10 h-10 bg-white border border-gray-300 rounded flex items-center justify-center text-lg shadow-sm cursor-pointer active:bg-gray-300"
+              onclick="sendLetter('B')"
+            >
+              B
+            </div>
+            <div
+              id="key-N"
+              class="w-10 h-10 bg-white border border-gray-300 rounded flex items-center justify-center text-lg shadow-sm cursor-pointer active:bg-gray-300"
+              onclick="sendLetter('N')"
+            >
+              N
+            </div>
+            <div
+              id="key-M"
+              class="w-10 h-10 bg-white border border-gray-300 rounded flex items-center justify-center text-lg shadow-sm cursor-pointer active:bg-gray-300"
+              onclick="sendLetter('M')"
+            >
+              M
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script src="./script.js"></script>
+  </body>
+</html>

@@ -1,42 +1,64 @@
-const express = require("express");
+import express from "express";
+import cors from "cors";
 
 const app = express();
 
 app.use(express.json());
+app.use(cors());
 
-const words = ["APPLE", "TIGER", "HOUSE", "CHECK", "PIZZA", "AMAR"];
+const words = ["APPLE", "TIGER", "HOUSE", "CHECK", "PIZZA"];
 
-const word = [];
-const guess = [];
+let word = [];
+
+let guesses = [];
 
 app.get("/word", async (req, res) => {
-  word.splice(0, word.length);
-  guess.splice(0, guess.length);
+  word.length = 0;
+  guesses.length = 0;
+
   const randomWord = words[Math.floor(Math.random() * words.length)];
-  for (let i = 0; i < randomWord.length; i++) {
-    guess.push("_");
-    word.push(randomWord[i]);
-  }
+  word = randomWord.split("");
+  guesses.push(Array(word.length).fill("_"));
+
   console.log(word);
-  return res.json({ length: randomWord.length, guess, randomWord, word });
+
+  return res.json({ length: word.length, guesses });
 });
 
 app.post("/check", async (req, res) => {
   const { letter } = req.body;
-  const indexes = [];
+  if (!letter) return res.status(400).json({ error: "invalid input" });
+
+  const upperLetter = letter.toUpperCase();
+  const newGuess = [...guesses[guesses.length - 1]];
+  const lastGuess =
+    guesses.length > 0
+      ? guesses[guesses.length - 1]
+      : Array(word.length).fill("_");
+
+  let correctGuess = false;
 
   for (let i = 0; i < word.length; i++) {
-    if (word[i] === letter) indexes.push(i);
+    if (word[i] === upperLetter && newGuess[i] === "_") {
+      newGuess[i] = upperLetter;
+      correctGuess = true;
+    }
   }
 
-  indexes.forEach((i) => {
-    guess[i] = letter;
-  });
+  if (correctGuess) guesses.push(newGuess);
+  else guesses.push([...guesses[guesses.length - 1]]);
 
-  console.log(guess);
-  return res.json({guess, word, indexes, letter})
+  if (!newGuess.includes("_")) return res.json({ message: "You won", guesses });
+
+  if (guesses.length >= 6)
+    return res.json({
+      message: "game over",
+      correctWord: word.join(""),
+      guesses,
+    });
+
+  return res.json({ guesses, attemptsLeft: 6 - guesses.length });
 });
-
 
 app.listen(3000, () => {
   console.log("Server is running on port 3000");
